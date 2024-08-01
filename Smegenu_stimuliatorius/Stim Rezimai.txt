@@ -1,0 +1,75 @@
+Is manualo:
+
+Darbo rezimai 3:
+
+tDCS (transcranial direct current stimulation)
+	Current amplitude	The value range for Amplitude is between 100μA and 5000μA.
+
+tACS (transcranial alternating current stimulation)
+	Current amplitude
+	Frequency		600Hz max
+	Offset			The offset parameter is only available for tACS.
+	Envelope Amplitude	Envelope amplitude is the depth of modulation of the tACS signal
+	Envelope Frequency 	f/2, but not higher than 100Hz max
+
+tRNS (transcranial random noise stimulation) 
+	Highpass Filter: None 50 100 250
+	Lowpass Filter: None 100 250 640
+	Noise Type: Rectangular, Gaussian
+
+------------------------------------------------------------
+Terminalo komandos:
+
+Set:
+:MODE TACS
+:MODE:PRST 0		1 to 8	Run stimulation from preset
+:MODE:FREQ 15			Set freq 0.05 to 600 Hz
+----------
+Read:
+:MODE?
+:MODE:AMP?		2000	Current amplitude
+:MODE:FREQ?		200	Frequency
+:MODE:MODU:FREQ?	20	Envelope Frequency
+:MODE:MODU:AMP?		400	Envelope Amplitude
+:MODE:TIME?			Total time set for stimulation
+----------
+Run:
+					
+:STIM:STRT 		(remember the single trailing space)
+:STIM:STAT?		Statistikos nuskaitymo komanda		Pradzios komanda: 2 1180768 1990 -1 8.7 4.4 0 0
+2 The stimulation phase is normal stimulation. 1180768  ms of stimulation remain. Measured current is 1990 μA, offset is -1 μA, voltage is 8.7 V and impedance is 4.4 kΩ. Error code is 0 – meaning no errors. Mode is sham mode.
+The stimulation phase is normal stimulation. 1000 ms of stimulation remain. Measured current is 2000 μA, offset is 100 μA, voltage is 14.0 V and impedance is 7.0 kΩ. Error code is 0 – meaning no errors. Mode is sham mode.
+:STIM:CNCL 		Stop with fade-out (remember the single trailing space)
+:STIM:STOP 		Stop without fade-out (remember the single trailing space)
+
+Run from presets:
+:MODE:PRST 1		1 to 8
+:STIM:STRT 		(remember space after cmd)
+:STIM:CNCL 		(remember space after cmd)
+
+Run on custom frequency:
+:MODE:PRST 0		set preset to custom (PRST 0)
+:MODE TACS		set mode to AC current stimulation)
+:MODE:FREQ 15		set frequency
+:STIM:STRT 		(remember space after cmd)
+:STIM:CNCL 		(remember space after cmd)
+----------
+
+PRESETs:
+1) 0.5	Hz
+2) 1	Hz
+3) 4	Hz
+4) 7.5	Hz
+5) 10	Hz
+6) 12	Hz
+7) 15	Hz
+8) 35	Hz
+
+
+
+------------------------------------------------------------------------------
+
+
+
+
+
