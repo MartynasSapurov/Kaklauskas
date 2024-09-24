@@ -31,11 +31,11 @@ df = pd.read_csv('Emotional Diamond.csv', sep=';', header=0)
 
 for column in df.columns:
     for value in range(len(df)):
-        print(f"{value} {column} {df[column][value]}")
+        print(str(df[column][value]))
         try:
             client.connect('158.129.192.209', 1883)
             time = datetime.datetime.now(timezone.utc)
-            time_str = str(time+datetime.timedelta(0, df['endPosSec'][value]))
+            time_str = str(time+datetime.timedelta(-1, df['endPosSec'][value]))
 
             transmit_data = {
                 "device": {
@@ -45,7 +45,7 @@ for column in df.columns:
                     "time": time_str,
                 },
                 "field": {
-                    "value": str(df[column][value]),
+                    "value": df[column][value],
                     "state": "good",
                     "friendly_name": str(column),
                     "unit": ""
