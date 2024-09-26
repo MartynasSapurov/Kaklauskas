@@ -3,6 +3,11 @@ from datetime import timezone
 import datetime
 import json
 import paho.mqtt.client as mqtt
+import numpy as np
+
+def np_encoder(object):
+    if isinstance(object, np.generic):
+        return object.item()
 
 MQTT_HOST = "158.129.192.209"
 MQTT_PORT = 1883
@@ -27,11 +32,12 @@ client.on_publish = on_publish
 
 client.username_pw_set("vgtu", "dPDIhIs2k0Cb")
 
-df = pd.read_csv('Emotional Diamond.csv', sep=';', header=0)
+df = pd.read_csv('Emotional Diamond.csv', sep=';', header=0, float_precision='legacy')
 
 for column in df.columns:
     for value in range(len(df)):
-        print(str(df[column][value]))
+        print(str(df[column][value]),str(column))
+
         try:
             client.connect('158.129.192.209', 1883)
             time = datetime.datetime.now(timezone.utc)
@@ -51,17 +57,22 @@ for column in df.columns:
                     "unit": ""
                 }
             }
+            MQTT_TOPIC = "MR101/" + str(column) + "/"
             MQTT_TOPIC = "MR101/"+str(column)+"/"
-            MQTT_MSG = json.dumps(transmit_data)
+            MQTT_MSG = json.dumps(transmit_data, default=np_encoder)
+
             client.publish(MQTT_TOPIC, MQTT_MSG)
 
             client.loop_stop()
 
         except:
-            print("Unable to read data")
+            print("Unable to write data")
 
 """
 print(df.columns)
+print("*"*80)
+print(df['index'][0])
+print("*"*80)
 time = datetime.datetime.now(timezone.utc)
 print(str(time+datetime.timedelta(0, df['endPosSec'][5])))
 print(df['endPosSec'][5])
