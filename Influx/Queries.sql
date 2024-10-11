@@ -1,0 +1,1 @@
+influx -precision rfc3339 -username telegraf -password 2jf79pTgHT -database 'vgtu_ts' -host 'localhost' -execute 'SELECT angry_value, arousal_value, neutral_value, sad_value, scared_value, surprised_value, valence_value FROM MA1 WHERE time>'\''2024-09-11 13:20:00'\'' AND time<'\''2024-09-11 15:00:00'\'' GROUP BY topic ' -format 'csv' > MA1_data_2024-09-11.csv
