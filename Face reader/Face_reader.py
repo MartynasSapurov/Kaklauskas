@@ -56,10 +56,12 @@ print(datetime.datetime.now(timezone.utc))
 
 try:
     client.connect('158.129.192.209', 1883)
-    for column in df.columns:
+    required_columns = df.columns[1:]
+    #required_columns = required_columns.remove('Video Time')
+    for column in required_columns:
         for value in range(len(df)):
             #print(str(df[column][value]),str(column))
-            """
+
             try:
 
                 time_str = my_times(df['Video Time'][value], OFFSET_DATE)
@@ -84,7 +86,6 @@ try:
 
             except:
                 print("Unable to write data")
-            """
     client.loop_stop()
 except:
     print("Unable to connect")
@@ -98,6 +99,4 @@ time = datetime.datetime.now(timezone.utc)
 #print(str(time+datetime.timedelta(0, df['Video Time'][5])))
 print(df['Video Time'][5012])
 """
-print(df["Happy"][5])
-print(type(df["Happy"][5]))
 
