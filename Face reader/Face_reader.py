@@ -10,8 +10,6 @@ import math
 def my_times(time_str, offset_date):
     time_str = time_str.replace('.', ':').split(':')
     time_int_list = [int(item) for item in time_str]
-    print(time_str)
-    print(time_int_list)
     return str(offset_date + datetime.timedelta(
     hours=time_int_list[0], minutes=time_int_list[1], seconds=time_int_list[2], milliseconds=time_int_list[3]))
 
@@ -63,9 +61,7 @@ try:
     for column in required_columns:
         for value in range(len(df)):
             #print(str(df[column][value]),str(column))
-            print(df['Video Time'][value])
-            print(my_times(df['Video Time'][value], OFFSET_DATE))
-            """
+
             try:
 
                 time_str = my_times(df['Video Time'][value], OFFSET_DATE)
@@ -90,7 +86,7 @@ try:
 
             except:
                 print("Unable to write data")
-            """
+
     client.loop_stop()
 except:
     print("Unable to connect")
@@ -104,3 +100,4 @@ time = datetime.datetime.now(timezone.utc)
 #print(str(time+datetime.timedelta(0, df['Video Time'][5])))
 print(df['Video Time'][5012])
 """
+
