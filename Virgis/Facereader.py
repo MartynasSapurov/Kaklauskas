@@ -7,7 +7,7 @@ start_time = (datetime.utcnow() - timedelta(hours=600)).strftime("%Y-%m-%dT%H:%M
 end_time = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
 # --- Configuration ---
-HOST = "localhost"
+HOST = "158.129.192.209"
 PORT = 8086
 USER = "dataread"
 PASS = "y8G1e2fENG"
